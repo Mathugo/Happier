@@ -1,9 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:happier/blocs/current_view/current_view.dart';
+import 'package:happier/ui/screens/chatbot.screen.dart';
 import 'package:happier/ui/screens/home.screen.dart';
 import 'package:happier/utils/constants/colors.dart';
 import 'package:happier/utils/helpers/create_material_color.dart';
@@ -33,14 +32,12 @@ class App extends StatelessWidget {
         ),
         body:
             BlocBuilder<CurrentViewBloc, ViewState>(builder: (context, state) {
-          print('Current ViewState: $state');
-
           if (state is HomeSelected) {
             return const HomeScreen();
           } else if (state is BoardSelected) {
             return const Text('Board');
           } else if (state is ChatbotSelected) {
-            return const Text('Chatbot');
+            return const ChatbotScreen();
           } else if (state is ObjectivesSelected) {
             return const Text('Objectives');
           }
@@ -49,8 +46,6 @@ class App extends StatelessWidget {
         }),
         bottomNavigationBar:
             BlocBuilder<CurrentViewBloc, ViewState>(builder: (context, state) {
-          print('Current viewId: ${state.viewId}');
-
           return BottomNavigationBar(
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
@@ -58,15 +53,15 @@ class App extends StatelessWidget {
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.add_alarm),
+                icon: Icon(Icons.border_all_outlined),
                 label: 'Board',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
+                icon: Icon(Icons.chat),
                 label: 'Chatbot',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.sanitizer),
+                icon: Icon(Icons.check_box_outlined),
                 label: 'Objectives',
               ),
             ],
