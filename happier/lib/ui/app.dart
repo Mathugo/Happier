@@ -35,11 +35,11 @@ class App extends StatelessWidget {
           if (state is HomeSelected) {
             return const HomeScreen();
           } else if (state is BoardSelected) {
-            return const Text('Board');
+            return const Center(child: Text('Board'));
           } else if (state is ChatbotSelected) {
             return const ChatbotScreen();
           } else if (state is ObjectivesSelected) {
-            return const Text('Objectives');
+            return const Center(child: Text('Objectives'));
           }
 
           return const HomeScreen();
