@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,12 +24,16 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        fontFamily: 'Open sans',
+        appBarTheme: AppBarTheme(
+          brightness: Brightness.dark,
+        ),
+        fontFamily: 'Lato',
         brightness: Brightness.light,
-        primaryColor: Colors.orange[100],
-        primarySwatch: createMaterialColor(Color(0xFFFFF2E3)),
+          scaffoldBackgroundColor: const Color(0xFFD5C5B3),
+        primaryColor: createMaterialColor(Color(0xFF176A60)),
+        primarySwatch: createMaterialColor(Color(0xFF54B7C6)),
       ),
-      home: const MyHomePage(title: 'Welcome to happier !'),
+      home: const MyHomePage(title: 'Welcome to Happier'),
     );
   }
 }
@@ -119,8 +124,21 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'Home page',
+            Text(
+              'Title',
+              style: GoogleFonts.lato(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                fontStyle: FontStyle.normal,
+              ),
+            ),
+            Text(
+              'Lorem ipsum',
+              style: GoogleFonts.lato(
+                fontSize: 20,
+                fontWeight: FontWeight.w400,
+                fontStyle: FontStyle.normal,
+              ),
             ),
           ],
         ),
