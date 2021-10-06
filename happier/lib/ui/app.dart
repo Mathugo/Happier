@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:happier/blocs/current_view/current_view.dart';
 import 'package:happier/ui/screens/chatbot.screen.dart';
 import 'package:happier/ui/screens/home.screen.dart';
+import 'package:happier/ui/screens/objectives.screen.dart';
 import 'package:happier/utils/constants/colors.dart';
 import 'package:happier/utils/helpers/create_material_color.dart';
 
@@ -39,7 +40,7 @@ class App extends StatelessWidget {
           } else if (state is ChatbotSelected) {
             return const ChatbotScreen();
           } else if (state is ObjectivesSelected) {
-            return const Center(child: Text('Objectives'));
+            return const ObjectivesScreen();
           }
 
           return const HomeScreen();
