@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:happier/api/models/chat_message.dart';
+import 'package:happier/utils/constants/colors.dart';
 
 class ChatbotScreen extends StatelessWidget {
   static const List<ChatMessage> testMessages = [
@@ -68,7 +69,7 @@ class _MessagesView extends StatelessWidget {
                     ],
                     color: (messages[index].messageType == 'receiver'
                         ? Colors.grey.shade200
-                        : Colors.blue[200]),
+                        : SECONDARY_COLOR),
                   ),
                   padding: const EdgeInsets.all(16),
                   child: Text(
@@ -107,7 +108,7 @@ class _ChatInputField extends StatelessWidget {
                 height: 30,
                 width: 30,
                 decoration: BoxDecoration(
-                  color: Colors.lightBlue,
+                  color: PRIMARY_COLOR,
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: const Icon(
@@ -138,7 +139,7 @@ class _ChatInputField extends StatelessWidget {
                 color: Colors.white,
                 size: 18,
               ),
-              backgroundColor: Colors.blue,
+              backgroundColor: PRIMARY_COLOR,
               elevation: 0,
             ),
           ],

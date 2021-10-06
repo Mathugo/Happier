@@ -29,6 +29,19 @@ class App extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: const Text(TITLE),
+          leading: Image.asset('assets/images/logo.PNG'),
+          actions: <Widget>[
+            // Icon button profile
+            IconButton(
+              icon: Icon(
+                Icons.account_circle,
+                color: PRIMARY_COLOR,
+              ),
+              onPressed: () {
+                // do something
+              },
+            )
+          ],
         ),
         body:
             BlocBuilder<CurrentViewBloc, ViewState>(builder: (context, state) {
