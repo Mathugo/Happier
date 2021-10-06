@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:happier/utils/constants/colors.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
