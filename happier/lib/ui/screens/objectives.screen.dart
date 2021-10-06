@@ -60,9 +60,9 @@ class _ObjectiveListItem extends StatelessWidget {
             const EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 10),
         margin: const EdgeInsets.only(left: 10, right: 10, bottom: 7),
         decoration: BoxDecoration(
-            color: SECONDARY_COLOR,
             borderRadius: BorderRadius.circular(10),
-            ),
+            border: Border.all(color: Colors.white, width: 2),
+            color: Colors.grey[100]),
         child: Row(
           children: [
             Expanded(
@@ -72,7 +72,8 @@ class _ObjectiveListItem extends StatelessWidget {
                 children: [
                   Text(
                     objective.title,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   Text(objective.description)
                 ],
