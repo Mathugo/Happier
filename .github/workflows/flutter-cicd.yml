@@ -30,12 +30,7 @@ jobs:
       with:
         channel: 'beta' # 'dev', 'alpha', default to: 'stable'
         # flutter-version: '1.12.x' # you can also specify exact version of flutter
-    
-    # Download DialogFlow auth file
-    - name: Download auth file
-      run: curl https://jsonkeeper.com/b/EHVY -o ./assets/dialog_flow_auth.json
 
-    
     # Get flutter dependencies.
     - run: flutter pub get
     
@@ -53,12 +48,12 @@ jobs:
     - run: flutter build web #--no-sound-null-safety
 
     # Deploy to Firebase
-    - uses: w9jds/firebase-action@master
-      with:
-        args: deploy --only hosting
-      env:
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        PROJECT_PATH: "./happier"
+    # - uses: w9jds/firebase-action@master
+    #   with:
+    #     args: deploy --only hosting
+    #   env:
+    #     FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+    #     PROJECT_PATH: "./happier"
     
     # Upload generated apk to the artifacts.
     # - uses: actions/upload-artifact@v1

@@ -15,7 +15,6 @@ void main() {
 }
 
 Future<void> initDialogFlow() async {
-  // https://jsonkeeper.com/b/EHVY
   DialogAuthCredentials credentials =
       await DialogAuthCredentials.fromFile('assets/dialog_flow_auth.json');
 
