@@ -24,13 +24,17 @@ class App extends StatelessWidget {
         ),
         fontFamily: 'Lato',
         brightness: Brightness.light,
-        primaryColor: Colors.orange[100],
-        primarySwatch: createMaterialColor(const Color(0xFFFFF2E3)),
+        primaryColor: PRIMARY_COLOR,
+        primarySwatch: createMaterialColor(SECONDARY_COLOR),
       ),
       home: Scaffold(
         appBar: AppBar(
           title: const Text(TITLE),
-          leading: Image.asset('assets/images/logo.PNG'),
+          leading: Padding(
+            padding: EdgeInsets.all(5),
+            child: Image.asset('assets/images/logo-appbar.png'),
+          ),
+
           actions: <Widget>[
             // Icon button profile
             IconButton(
