@@ -5,13 +5,12 @@ import 'package:happier/blocs/current_view/current_view.dart';
 import 'package:happier/ui/app.dart';
 
 void main() {
-  initDialogFlow();
-
   runApp(MultiBlocProvider(providers: <BlocProvider>[
     BlocProvider<CurrentViewBloc>(
       create: (_) => CurrentViewBloc(),
     ),
   ], child: const App()));
+  initDialogFlow();
 }
 
 Future<void> initDialogFlow() async {
