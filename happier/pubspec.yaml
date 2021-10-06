@@ -26,7 +26,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  google_fonts: ^2.1.0
+  google_fonts:
   flutter_bloc: ^7.3.0
   equatable: ^2.0.3
   flutter_dialogflow_v2:
@@ -42,7 +42,6 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
-  google_fonts:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -58,7 +57,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/logo-appbar.png
-    - assets/happier-dialog_flow_key.json
+    - assets/happier-327510-e9f2dc59081e.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
