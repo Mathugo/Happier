@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:happier/api/models/objective.dart';
-import 'package:happier/utils/constants/colors.dart';
 
 class ObjectivesScreen extends StatelessWidget {
   static const List<Objective> testObjectives = [

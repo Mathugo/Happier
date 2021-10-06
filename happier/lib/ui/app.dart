@@ -29,16 +29,28 @@ class App extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text(TITLE),
+          title: BlocBuilder<CurrentViewBloc, ViewState>(
+              builder: (context, state) {
+            String titleText = TITLE;
+            if (state is HomeSelected) {
+              titleText = 'Home';
+            } else if (state is BoardSelected) {
+              titleText = 'Board';
+            } else if (state is ChatbotSelected) {
+              titleText = 'Chatbot';
+            } else if (state is ObjectivesSelected) {
+              titleText = 'Objectives';
+            }
+            return Center(child: Text(titleText));
+          }),
           leading: Padding(
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             child: Image.asset('assets/images/logo-appbar.png'),
           ),
-
           actions: <Widget>[
             // Icon button profile
             IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.account_circle,
                 color: PRIMARY_COLOR,
               ),
@@ -86,6 +98,7 @@ class App extends StatelessWidget {
             currentIndex: state.viewId,
             selectedItemColor: PRIMARY_COLOR,
             unselectedItemColor: SECONDARY_COLOR,
+            showSelectedLabels: false,
             onTap: (int i) => _onNavigationTap(i, context),
           );
         }),
