@@ -30,6 +30,61 @@ class ChatbotScreen extends StatelessWidget {
   }
 }
 
+class _MessagesView extends StatelessWidget {
+  const _MessagesView({
+    Key? key,
+    required this.messages,
+  }) : super(key: key);
+
+  final List<ChatMessage> messages;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: <Widget>[
+        ListView.builder(
+          itemCount: messages.length,
+          shrinkWrap: true,
+          padding: const EdgeInsets.only(top: 10, bottom: 10),
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            return Container(
+              padding: const EdgeInsets.only(
+                  left: 14, right: 14, top: 10, bottom: 10),
+              child: Align(
+                alignment: (messages[index].messageType == 'receiver'
+                    ? Alignment.topLeft
+                    : Alignment.topRight),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        spreadRadius: 3,
+                        blurRadius: 7,
+                        offset: const Offset(0, 3),
+                      )
+                    ],
+                    color: (messages[index].messageType == 'receiver'
+                        ? Colors.grey.shade200
+                        : Colors.blue[200]),
+                  ),
+                  padding: const EdgeInsets.all(16),
+                  child: Text(
+                    messages[index].messageContent,
+                    style: const TextStyle(fontSize: 15),
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
+}
+
 class _ChatInputField extends StatelessWidget {
   const _ChatInputField({
     Key? key,
@@ -89,61 +144,6 @@ class _ChatInputField extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _MessagesView extends StatelessWidget {
-  const _MessagesView({
-    Key? key,
-    required this.messages,
-  }) : super(key: key);
-
-  final List<ChatMessage> messages;
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        ListView.builder(
-          itemCount: messages.length,
-          shrinkWrap: true,
-          padding: const EdgeInsets.only(top: 10, bottom: 10),
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            return Container(
-              padding: const EdgeInsets.only(
-                  left: 14, right: 14, top: 10, bottom: 10),
-              child: Align(
-                alignment: (messages[index].messageType == 'receiver'
-                    ? Alignment.topLeft
-                    : Alignment.topRight),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
-                        spreadRadius: 3,
-                        blurRadius: 7,
-                        offset: const Offset(0, 3),
-                      )
-                    ],
-                    color: (messages[index].messageType == 'receiver'
-                        ? Colors.grey.shade200
-                        : Colors.blue[200]),
-                  ),
-                  padding: const EdgeInsets.all(16),
-                  child: Text(
-                    messages[index].messageContent,
-                    style: const TextStyle(fontSize: 15),
-                  ),
-                ),
-              ),
-            );
-          },
-        ),
-      ],
     );
   }
 }
