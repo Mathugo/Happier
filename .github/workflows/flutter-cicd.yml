@@ -6,6 +6,7 @@ on:
   push:
     branches:
     - chatbot
+    - main
     
 # on: push    # Default will running for every branch.
     
@@ -44,7 +45,7 @@ jobs:
     
     # Build apk and web.
     # - run: flutter build apk
-    - run: flutter build web
+    - run: flutter build web --no-sound-null-safety
 
     # Deploy to Firebase
     - uses: w9jds/firebase-action@master
