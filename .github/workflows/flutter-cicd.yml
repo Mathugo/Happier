@@ -31,6 +31,11 @@ jobs:
         channel: 'beta' # 'dev', 'alpha', default to: 'stable'
         # flutter-version: '1.12.x' # you can also specify exact version of flutter
     
+    # Download DialogFlow auth file
+    - name: Download auth file
+      run: curl https://jsonkeeper.com/b/EHVY -o ./assets/dialog_flow_auth.json
+
+    
     # Get flutter dependencies.
     - run: flutter pub get
     
@@ -45,7 +50,7 @@ jobs:
     
     # Build apk and web.
     # - run: flutter build apk
-    - run: flutter build web --no-sound-null-safety
+    - run: flutter build web #--no-sound-null-safety
 
     # Deploy to Firebase
     - uses: w9jds/firebase-action@master
