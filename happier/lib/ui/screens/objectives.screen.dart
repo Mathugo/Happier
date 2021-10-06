@@ -58,22 +58,34 @@ class _ObjectiveListItem extends StatelessWidget {
     return Container(
         padding:
             const EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 10),
-        color: SECONDARY_COLOR,
-        child: Column(
+        margin: const EdgeInsets.only(left: 10, right: 10),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: Colors.white, width: 2)),
+        child: Row(
           children: [
-            Row(
-              children: [
-                Text(objective.title),
-                const Spacer(),
-                Text(objective.isCompleted.toString(),
-                    style: TextStyle(
-                      color: objective.isCompleted == true
-                          ? Colors.green
-                          : Colors.red,
-                    ))
-              ],
+            Expanded(
+              flex: 12,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    objective.title,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text(objective.description)
+                ],
+              ),
             ),
-            Text(objective.description)
+            const Spacer(),
+            Flexible(
+              flex: 1,
+              child: Checkbox(
+                checkColor: Colors.white,
+                value: objective.isCompleted,
+                onChanged: (bool? value) {},
+              ),
+            )
           ],
         ));
   }
