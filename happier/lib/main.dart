@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_dialogflow_v2/flutter_dialogflow_v2.dart' as Dialog;
 
 void main() {
+  initchatbot();
   runApp(const MyApp());
 }
 
@@ -29,13 +31,39 @@ class MyApp extends StatelessWidget {
         ),
         fontFamily: 'Lato',
         brightness: Brightness.light,
-          scaffoldBackgroundColor: const Color(0xFFD5C5B3),
+        scaffoldBackgroundColor: const Color(0xFFD5C5B3),
         primaryColor: createMaterialColor(Color(0xFF176A60)),
         primarySwatch: createMaterialColor(Color(0xFF54B7C6)),
       ),
       home: const MyHomePage(title: 'Welcome to Happier'),
     );
   }
+}
+
+void initchatbot() async {
+  print("[*] Retrieving key ..");
+
+  Dialog.AuthGoogle authGoogle =
+      await Dialog.AuthGoogle(fileJson: 'assets/happier-dialog_flow_key.json')
+          .build();
+  print("[*] Done");
+  /*Dialog.Dialogflow dialogflow =
+      Dialog.Dialogflow(authGoogle: authGoogle, sessionId: '123456');
+  Dialog.DetectIntentResponse response = await dialogflow.detectIntent(
+    Dialog.DetectIntentRequest(
+      queryInput: Dialog.QueryInput(
+        text: Dialog.TextInput(
+          text: 'Hello !',
+          languageCode: Dialog.Language.english,
+        ),
+      ),
+      queryParams: Dialog.QueryParameters(
+        resetContexts: true,
+      ),
+    ),
+  );
+  */
+  //response.queryResult.queryText;
 }
 
 MaterialColor createMaterialColor(Color color) {
@@ -134,6 +162,14 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               'Lorem ipsum',
+              style: GoogleFonts.lato(
+                fontSize: 20,
+                fontWeight: FontWeight.w400,
+                fontStyle: FontStyle.normal,
+              ),
+            ),
+            Text(
+              '',
               style: GoogleFonts.lato(
                 fontSize: 20,
                 fontWeight: FontWeight.w400,
