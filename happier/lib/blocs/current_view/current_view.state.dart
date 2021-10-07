@@ -9,22 +9,17 @@ abstract class ViewState extends Equatable {
   get viewId => null;
 }
 
-class HomeSelected extends ViewState {
+class BoardSelected extends ViewState {
   @override
   get viewId => 0;
 }
 
-class BoardSelected extends ViewState {
+class ChatbotSelected extends ViewState {
   @override
   get viewId => 1;
 }
 
-class ChatbotSelected extends ViewState {
-  @override
-  get viewId => 2;
-}
-
 class ObjectivesSelected extends ViewState {
   @override
-  get viewId => 3;
+  get viewId => 2;
 }

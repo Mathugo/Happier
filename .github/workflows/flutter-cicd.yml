@@ -6,7 +6,6 @@ on:
   push:
     branches:
     - main
-    - chatbot
     
 # on: push    # Default will running for every branch.
     
