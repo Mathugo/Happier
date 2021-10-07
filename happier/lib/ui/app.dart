@@ -98,6 +98,7 @@ class App extends StatelessWidget {
             selectedItemColor: PRIMARY_COLOR,
             unselectedItemColor: SECONDARY_COLOR,
             showSelectedLabels: false,
+            showUnselectedLabels: false,
             onTap: (int i) => _onNavigationTap(i, context),
           );
         }),
