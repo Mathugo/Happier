@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:happier/blocs/current_view/current_view.dart';
+import 'package:happier/ui/screens/board.screen.dart';
 import 'package:happier/ui/screens/chatbot.screen.dart';
-import 'package:happier/ui/screens/home.screen.dart';
 import 'package:happier/ui/screens/objectives.screen.dart';
 import 'package:happier/utils/constants/colors.dart';
 import 'package:happier/utils/helpers/create_material_color.dart';
@@ -32,9 +32,7 @@ class App extends StatelessWidget {
           title: BlocBuilder<CurrentViewBloc, ViewState>(
               builder: (context, state) {
             String titleText = TITLE;
-            if (state is HomeSelected) {
-              titleText = 'Home';
-            } else if (state is BoardSelected) {
+            if (state is BoardSelected) {
               titleText = 'Board';
             } else if (state is ChatbotSelected) {
               titleText = 'Chatbot';
@@ -62,9 +60,7 @@ class App extends StatelessWidget {
         ),
         body:
             BlocBuilder<CurrentViewBloc, ViewState>(builder: (context, state) {
-          if (state is HomeSelected) {
-            return const HomeScreen();
-          } else if (state is BoardSelected) {
+          if (state is BoardSelected) {
             return const Center(child: Text('Board'));
           } else if (state is ChatbotSelected) {
             return const ChatbotScreen();
@@ -72,16 +68,13 @@ class App extends StatelessWidget {
             return const ObjectivesScreen();
           }
 
-          return const HomeScreen();
+          return const BoardScreen();
         }),
         bottomNavigationBar:
             BlocBuilder<CurrentViewBloc, ViewState>(builder: (context, state) {
           return BottomNavigationBar(
             items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
-              ),
+              
               BottomNavigationBarItem(
                 icon: Icon(Icons.border_all_outlined),
                 label: 'Board',
@@ -110,17 +103,13 @@ class App extends StatelessWidget {
     switch (index) {
       case 0:
         BlocProvider.of<CurrentViewBloc>(context)
-            .add(ViewRequested(view: HomeSelected()));
+            .add(ViewRequested(view: BoardSelected()));
         break;
       case 1:
         BlocProvider.of<CurrentViewBloc>(context)
-            .add(ViewRequested(view: BoardSelected()));
-        break;
-      case 2:
-        BlocProvider.of<CurrentViewBloc>(context)
             .add(ViewRequested(view: ChatbotSelected()));
         break;
-      case 3:
+      case 2:
         BlocProvider.of<CurrentViewBloc>(context)
             .add(ViewRequested(view: ObjectivesSelected()));
         break;
