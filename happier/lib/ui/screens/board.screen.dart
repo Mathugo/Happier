@@ -8,7 +8,7 @@ class BoardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       Container(
-        margin: const EdgeInsets.all(10.0),
+        margin: const EdgeInsets.all(30.0),
         child: const Align(
           alignment: Alignment.centerLeft,
           child: Text(
@@ -64,7 +64,7 @@ class BoardScreen extends StatelessWidget {
 
       // PIE CHARTS
       Container(
-          margin: const EdgeInsets.all(10.0),
+          margin: const EdgeInsets.only(top: 10.0, left: 30, right: 30),
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             Expanded(
@@ -154,14 +154,14 @@ class BoardScreen extends StatelessWidget {
           ])),
 
       Container(
-        margin: const EdgeInsets.all(10.0),
+        margin: const EdgeInsets.all(30.0),
         child: const Align(
           alignment: Alignment.centerLeft,
           child: Text(
             'Hap\'s thoughts',
             style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 24,
+                fontSize: 30,
                 color: Color(0xFF444444)),
           ),
         ),
@@ -169,7 +169,7 @@ class BoardScreen extends StatelessWidget {
 
       // STATISTICS LABEL
       Container(
-        margin: const EdgeInsets.all(10.0),
+        margin: const EdgeInsets.only(left: 30, right: 30),
         child: const Align(
           alignment: Alignment.centerLeft,
           child: Text(
@@ -180,7 +180,7 @@ class BoardScreen extends StatelessWidget {
       ),
 
       Container(
-        margin: const EdgeInsets.all(10.0),
+        margin: const EdgeInsets.all(30.0),
         child: const Align(
           alignment: Alignment.centerLeft,
           child: Text(

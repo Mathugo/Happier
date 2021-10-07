@@ -3,8 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:happier/blocs/current_view/current_view.dart';
 import 'package:happier/ui/app.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+  // Add these 2 lines
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIOverlays([
+    SystemUiOverlay.bottom, //This line is used for showing the bottom bar
+  ]);
   runApp(MultiBlocProvider(providers: <BlocProvider>[
     BlocProvider<CurrentViewBloc>(
       create: (_) => CurrentViewBloc(),

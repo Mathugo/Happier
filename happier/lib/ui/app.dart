@@ -7,6 +7,7 @@ import 'package:happier/ui/screens/chatbot.screen.dart';
 import 'package:happier/ui/screens/objectives.screen.dart';
 import 'package:happier/utils/constants/colors.dart';
 import 'package:happier/utils/helpers/create_material_color.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
 class App extends StatelessWidget {
   static const TITLE = 'Happier';
@@ -39,17 +40,22 @@ class App extends StatelessWidget {
             } else if (state is ObjectivesSelected) {
               titleText = 'Objectives';
             }
-            return Center(child: Text(titleText));
+            return Center(child: Text(
+              titleText,
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF504538)),
+            ));
           }),
           leading: Padding(
-            padding: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(10),
             child: Image.asset('assets/images/logo-appbar.png'),
           ),
           actions: <Widget>[
             // Icon button profile
             IconButton(
               icon: const Icon(
-                Icons.account_circle,
+                FeatherIcons.phone,
                 color: PRIMARY_COLOR,
               ),
               onPressed: () {
@@ -76,15 +82,15 @@ class App extends StatelessWidget {
             items: const <BottomNavigationBarItem>[
               
               BottomNavigationBarItem(
-                icon: Icon(Icons.border_all_outlined),
+                icon: Icon(FeatherIcons.home),
                 label: 'Board',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.chat),
+                icon: Icon(FeatherIcons.messageCircle),
                 label: 'Chatbot',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.check_box_outlined),
+                icon: Icon(FeatherIcons.calendar),
                 label: 'Objectives',
               ),
             ],
