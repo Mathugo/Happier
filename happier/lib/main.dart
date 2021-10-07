@@ -10,19 +10,34 @@ void main() {
       create: (_) => CurrentViewBloc(),
     ),
   ], child: const App()));
-  initDialogFlow();
+  //initDialogFlow();
 }
 
-Future<void> initDialogFlow() async {
-  DialogAuthCredentials credentials =
-      await DialogAuthCredentials.fromFile('assets/dialog_flow_auth.json');
+// Future<void> initDialogFlow() async {
+//   DialogAuthCredentials credentials =
+//       await DialogAuthCredentials.fromFile('assets/dialog_flow_auth.json');
 
-  DialogFlowtter instance = DialogFlowtter(
-    credentials: credentials,
-  );
+//   DialogFlowtter instance = DialogFlowtter(
+//     credentials: credentials,
+//   );
 
-  print('Initialized DialogFlow!');
-}
+//   print('Initialized dialogFlow!');
+
+//   final QueryInput queryInput = QueryInput(
+//     text: TextInput(
+//       text: "Hi. How are you?",
+//       languageCode: "en",
+//     ),
+//   );
+
+//   DetectIntentResponse response = await instance.detectIntent(
+//     queryInput: queryInput,
+//   );
+
+//   String? textResponse = response.text;
+
+//   print('dialogFlow response: $textResponse'); // Hi, how may I help you?
+// }
 
 // void initchatbot() async {
 //   print("[*] Retrieving key ..");
