@@ -6,7 +6,7 @@ class BoardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text('Testing some stuff!'),
+      child: Text('Board, to be implemented!'),
     );
   }
 }

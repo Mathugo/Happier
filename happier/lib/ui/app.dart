@@ -61,7 +61,7 @@ class App extends StatelessWidget {
         body:
             BlocBuilder<CurrentViewBloc, ViewState>(builder: (context, state) {
           if (state is BoardSelected) {
-            return const Center(child: Text('Board'));
+            return const BoardScreen();
           } else if (state is ChatbotSelected) {
             return const ChatbotScreen();
           } else if (state is ObjectivesSelected) {
