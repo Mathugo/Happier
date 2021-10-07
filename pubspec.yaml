@@ -29,6 +29,7 @@ dependencies:
   flutter_bloc: ^7.3.0
   equatable: ^2.0.3
   google_fonts: ^2.1.0
+  camera: ^0.9.4+1
 
 dev_dependencies:
   flutter_native_splash: ^1.2.4

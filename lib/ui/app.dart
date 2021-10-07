@@ -1,17 +1,19 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:happier2/blocs/current_view/current_view.dart';
 import 'package:happier2/ui/screens/board.screen.dart';
-import 'package:happier2/ui/screens/chatbot.screen.dart';
+import 'package:happier2/ui/screens/camera.screen.dart';
 import 'package:happier2/ui/screens/objectives.screen.dart';
 import 'package:happier2/utils/constants/colors.dart';
 import 'package:happier2/utils/helpers/create_material_color.dart';
 
 class App extends StatelessWidget {
   static const TITLE = 'Happier';
+  final List<CameraDescription> cameras;
 
-  const App({Key? key}) : super(key: key);
+  const App({required this.cameras, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class App extends StatelessWidget {
             if (state is BoardSelected) {
               titleText = 'Board';
             } else if (state is ChatbotSelected) {
-              titleText = 'Chatbot';
+              titleText = 'Camera';
             } else if (state is ObjectivesSelected) {
               titleText = 'Objectives';
             }
@@ -63,7 +65,7 @@ class App extends StatelessWidget {
           if (state is BoardSelected) {
             return const BoardScreen();
           } else if (state is ChatbotSelected) {
-            return const ChatbotScreen();
+            return CameraScreen(cameras: cameras);
           } else if (state is ObjectivesSelected) {
             return const ObjectivesScreen();
           }
@@ -79,8 +81,8 @@ class App extends StatelessWidget {
                 label: 'Board',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.chat),
-                label: 'Chatbot',
+                icon: Icon(Icons.camera),
+                label: 'Camera',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.check_box_outlined),
