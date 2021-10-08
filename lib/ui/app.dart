@@ -1,19 +1,15 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:happier2/blocs/current_view/current_view.dart';
 import 'package:happier2/ui/screens/board.screen.dart';
-import 'package:happier2/ui/screens/camera.screen.dart';
-import 'package:happier2/ui/screens/objectives.screen.dart';
 import 'package:happier2/utils/constants/colors.dart';
 import 'package:happier2/utils/helpers/create_material_color.dart';
 
 class App extends StatelessWidget {
   static const TITLE = 'Happier';
-  final List<CameraDescription> cameras;
 
-  const App({required this.cameras, Key? key}) : super(key: key);
+  const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,19 +35,24 @@ class App extends StatelessWidget {
             } else if (state is ChatbotSelected) {
               titleText = 'Camera';
             } else if (state is ObjectivesSelected) {
-              titleText = 'Objectives';
+              titleText = 'Settings';
             }
-            return Center(child: Text(titleText));
+            return Center(child: Text(
+              titleText,
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF504538)),
+            ));
           }),
           leading: Padding(
-            padding: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(10),
             child: Image.asset('assets/images/logo-appbar.png'),
           ),
           actions: <Widget>[
             // Icon button profile
             IconButton(
               icon: const Icon(
-                Icons.account_circle,
+                Icons.phone,
                 color: PRIMARY_COLOR,
               ),
               onPressed: () {
@@ -65,9 +66,9 @@ class App extends StatelessWidget {
           if (state is BoardSelected) {
             return const BoardScreen();
           } else if (state is ChatbotSelected) {
-            return CameraScreen(cameras: cameras);
+            return const Text('');
           } else if (state is ObjectivesSelected) {
-            return const ObjectivesScreen();
+            return const Text('');
           }
 
           return const BoardScreen();
@@ -76,8 +77,9 @@ class App extends StatelessWidget {
             BlocBuilder<CurrentViewBloc, ViewState>(builder: (context, state) {
           return BottomNavigationBar(
             items: const <BottomNavigationBarItem>[
+              
               BottomNavigationBarItem(
-                icon: Icon(Icons.border_all_outlined),
+                icon: Icon(Icons.home),
                 label: 'Board',
               ),
               BottomNavigationBarItem(
@@ -85,8 +87,8 @@ class App extends StatelessWidget {
                 label: 'Camera',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.check_box_outlined),
-                label: 'Objectives',
+                icon: Icon(Icons.settings),
+                label: 'Settings',
               ),
             ],
             currentIndex: state.viewId,

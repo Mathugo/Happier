@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:happier2/blocs/current_view/current_view.dart';
 
-abstract class ViewEvent extends Equatable {
+abstract class ViewEvent extends Equatable{
   const ViewEvent();
 }
 
