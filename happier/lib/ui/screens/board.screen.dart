@@ -243,6 +243,8 @@ class BoardScreen extends StatelessWidget {
           ),
         ),
         Container(
+            margin:
+            const EdgeInsets.only(bottom: 30),
             child: CarouselSlider(
               options: CarouselOptions(
                 aspectRatio: 2.0,

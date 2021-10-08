@@ -17,8 +17,22 @@ class ObjectivesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
-        Expanded(child: _ObjectivesList(objectives: testObjectives)),
+      children: [
+        Container(
+          margin: const EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 15),
+          child: const Text(
+            'Here is a small list of goals for the week. Don\'t rush, do them when you feel like it and have time, the goal is not to do them all.',
+            style: TextStyle(
+                fontSize: 18,
+                color: Color(0xFF444444)
+            ),
+            textAlign: TextAlign.justify,
+          ),
+        ),
+        Container(
+            margin: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
+            child: const _ObjectivesList(objectives: testObjectives)
+        ),
       ],
     );
   }
@@ -72,7 +86,7 @@ class _ObjectiveListItem extends StatelessWidget {
                   Text(
                     objective.title,
                     style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold),
+                        fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF444444)),
                   ),
                   Text(objective.description)
                 ],
