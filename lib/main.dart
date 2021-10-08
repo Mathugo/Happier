@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: <BlocProvider>[BlocProvider(create: (_) => CurrentViewBloc())],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Camera App',
         home: CameraScreen(cameras: cameras),
       ),
