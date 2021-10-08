@@ -4,6 +4,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:happier2/ui/widgets/pie_chart.dart';
+import 'package:happier2/utils/constants/colors.dart';
 
 import '../../size_config.dart';
 import 'land.dart';
@@ -129,6 +130,25 @@ class _BodyState extends State<Body> {
                               ],
                             )),
                       ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 66),
+                      child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(primary: SECONDARY_COLOR),
+                            onPressed: () {
+                              // Respond to button press
+                            },
+                            icon:
+                                const Icon(Icons.keyboard_arrow_right_rounded, size: 30),
+                            label: const Text(
+                              'Learn more',
+                              style: TextStyle(fontSize: 20),
+                            ),
+                          )),
                     ),
                   )
                 ],
