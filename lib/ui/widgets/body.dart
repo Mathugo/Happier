@@ -1,6 +1,9 @@
 import 'dart:async';
 
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:happier2/ui/widgets/pie_chart.dart';
 
 import '../../size_config.dart';
 import 'land.dart';
@@ -85,7 +88,9 @@ class _BodyState extends State<Body> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const VerticalSpacing(of: 50,),
+                  const VerticalSpacing(
+                    of: 50,
+                  ),
                   Text(
                     'You look happy!',
                     style: Theme.of(context).textTheme.headline3?.copyWith(
@@ -96,7 +101,36 @@ class _BodyState extends State<Body> {
                     'You can find a more detailed report below:',
                     style: TextStyle(color: Colors.white),
                   ),
-                  
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40),
+                    child: Flexible(
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: Container(
+                            height: 280,
+                            width: 260,
+                            decoration: BoxDecoration(
+                                color: Colors.grey.withOpacity(0.3),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(30))),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      bottom: 20, top: 10),
+                                  child: Text('Detected feelings:',
+                                      style: GoogleFonts.lato(
+                                          textStyle: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18))),
+                                ),
+                                const PieChartSample3(),
+                              ],
+                            )),
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
