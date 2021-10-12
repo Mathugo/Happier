@@ -39,7 +39,16 @@ final List<Widget> imageSliders = imgList
                   borderRadius: const BorderRadius.all(Radius.circular(5.0)),
                   child: Stack(
                     children: <Widget>[
-                      CachedNetworkImage(imageUrl: item, fit: BoxFit.cover, width: 1000.0),
+                      CachedNetworkImage(
+                          imageUrl: item,
+                          progressIndicatorBuilder:
+                              (context, url, downloadProgress) =>
+                                  CircularProgressIndicator(
+                                      value: downloadProgress.progress),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                          fit: BoxFit.cover,
+                          width: 1000.0),
                       Positioned(
                         bottom: 0.0,
                         left: 0.0,

@@ -8,9 +8,9 @@ import 'package:flutter/services.dart';
 void main() {
   // Add these 2 lines
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIOverlays([
-    SystemUiOverlay.bottom, //This line is used for showing the bottom bar
-  ]);
+  // SystemChrome.setEnabledSystemUIOverlays([
+  //   SystemUiOverlay.bottom, //This line is used for showing the bottom bar
+  // ]);
   runApp(MultiBlocProvider(providers: <BlocProvider>[
     BlocProvider<CurrentViewBloc>(
       create: (_) => CurrentViewBloc(),
