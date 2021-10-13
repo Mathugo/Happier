@@ -16,9 +16,18 @@ void main() {
       create: (_) => CurrentViewBloc(),
     ),
   ], child: const App()));
-  //initDialogFlow();
+  initDialogFlow();
 }
 
+Future<void> initDialogFlow() async {
+  print("[*] Getting credentials ..");
+  DialogAuthCredentials credentials =
+      await DialogAuthCredentials.fromFile('assets/credentials.json');
+  DialogFlowtter instance = DialogFlowtter(
+    credentials: credentials,
+  );
+  print("[*] Done");
+}
 // Future<void> initDialogFlow() async {
 //   DialogAuthCredentials credentials =
 //       await DialogAuthCredentials.fromFile('assets/dialog_flow_auth.json');
