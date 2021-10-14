@@ -106,95 +106,92 @@ class BoardScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Expanded(
-                    child: Container(
-                        child: Column(children: [
+                    child: Column(children: [
                       Container(
-                          margin: const EdgeInsets.only(bottom: 20),
-                          child: const Text('Current week')),
-                      Container(
-                          width: 100,
-                          height: 100,
-                          child: PieChart(
-                            PieChartData(sections: [
-                              PieChartSectionData(
-                                  color: const Color(0xFF728D6E),
-                                  value: 80,
-                                  showTitle: false,
-                                  radius: 10),
-                              PieChartSectionData(
-                                  color: const Color(0xFFEFEFEF),
-                                  value: 20,
-                                  showTitle: false,
-                                  radius: 10)
-                            ], startDegreeOffset: 270),
-                            swapAnimationDuration:
-                                const Duration(milliseconds: 150),
-                            // Optional
-                            swapAnimationCurve: Curves.linear, // Optional
-                          ))
+                      margin: const EdgeInsets.only(bottom: 20),
+                      child: const Text('Current week')),
+                      SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: PieChart(
+                        PieChartData(sections: [
+                          PieChartSectionData(
+                              color: const Color(0xFF728D6E),
+                              value: 80,
+                              showTitle: false,
+                              radius: 10),
+                          PieChartSectionData(
+                              color: const Color(0xFFEFEFEF),
+                              value: 20,
+                              showTitle: false,
+                              radius: 10)
+                        ], startDegreeOffset: 270),
+                        swapAnimationDuration:
+                            const Duration(milliseconds: 150),
+                        // Optional
+                        swapAnimationCurve: Curves.linear, // Optional
+                      ))
 
                       //Text('CHART1')
-                    ])),
+                    ]),
                   ),
                   Expanded(
-                    child: Container(
-                        child: Column(children: [
+                    child: Column(children: [
                       Container(
-                          margin: const EdgeInsets.only(bottom: 20),
-                          child: const Text('Last week')),
-                      Container(
-                          width: 100,
-                          height: 100,
-                          child: PieChart(
-                            PieChartData(sections: [
-                              PieChartSectionData(
-                                  color: const Color(0xFF969E7F),
-                                  value: 60,
-                                  showTitle: false,
-                                  radius: 10),
-                              PieChartSectionData(
-                                  color: const Color(0xFFEFEFEF),
-                                  value: 40,
-                                  showTitle: false,
-                                  radius: 10)
-                            ], startDegreeOffset: 270),
-                            swapAnimationDuration:
-                                const Duration(milliseconds: 150),
-                            // Optional
-                            swapAnimationCurve: Curves.linear, // Optional
-                          ))
-                    ])),
+                      margin: const EdgeInsets.only(bottom: 20),
+                      child: const Text('Last week')),
+                      SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: PieChart(
+                        PieChartData(sections: [
+                          PieChartSectionData(
+                              color: const Color(0xFF969E7F),
+                              value: 60,
+                              showTitle: false,
+                              radius: 10),
+                          PieChartSectionData(
+                              color: const Color(0xFFEFEFEF),
+                              value: 40,
+                              showTitle: false,
+                              radius: 10)
+                        ], startDegreeOffset: 270),
+                        swapAnimationDuration:
+                            const Duration(milliseconds: 150),
+                        // Optional
+                        swapAnimationCurve: Curves.linear, // Optional
+                      ))
+                    ]),
                   ),
                   Expanded(
-                    child: Container(
-                        child: Column(children: [
+                    child: Column(children: [
                       Container(
-                          margin: const EdgeInsets.only(bottom: 20),
-                          child: const Text('Last month')),
-                      Container(
-                          width: 100,
-                          height: 100,
-                          child: PieChart(
-                            PieChartData(sections: [
-                              PieChartSectionData(
-                                  color: const Color(0xFFB6AF95),
-                                  value: 50,
-                                  showTitle: false,
-                                  radius: 10),
-                              PieChartSectionData(
-                                  color: const Color(0xFFEFEFEF),
-                                  value: 50,
-                                  showTitle: false,
-                                  radius: 10)
-                            ], startDegreeOffset: 270),
-                            swapAnimationDuration:
-                                const Duration(milliseconds: 150),
-                            // Optional
-                            swapAnimationCurve: Curves.linear, // Optional
-                          ))
+                      margin: const EdgeInsets.only(bottom: 20),
+                      child: const Text('Last month')),
+                      SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: PieChart(
+                        PieChartData(sections: [
+                          PieChartSectionData(
+                              color: const Color(0xFFB6AF95),
+                              value: 50,
+                              showTitle: false,
+                              radius: 10),
+                          PieChartSectionData(
+                              color: const Color(0xFFEFEFEF),
+                              value: 50,
+                              showTitle: false,
+                              radius: 10)
+                        ], startDegreeOffset: 270),
+                        swapAnimationDuration:
+                            const Duration(milliseconds: 150),
+                        // Optional
+                        swapAnimationCurve: Curves.linear, // Optional
+                      ))
 
                       //Text('CHART1')
-                    ])),
+                    ]),
                   )
                 ])),
 

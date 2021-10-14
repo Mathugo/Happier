@@ -19,7 +19,7 @@ class ChatbotScreen extends StatelessWidget {
               return _MessagesView(messages: state.messages);
             }
 
-            return Text('Something is wrong! currentChatState: $state');
+            return const CircularProgressIndicator();
           }),
         ),
         _ChatInputField()
@@ -44,7 +44,6 @@ class _MessagesView extends StatelessWidget {
           itemCount: messages.length,
           shrinkWrap: true,
           padding: const EdgeInsets.only(top: 10, bottom: 10),
-          physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return Container(
               padding: const EdgeInsets.only(
@@ -102,7 +101,11 @@ class _ChatInputField extends StatelessWidget {
         child: Row(
           children: <Widget>[
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                BlocProvider.of<ChatBloc>(context).add(
+                  ClearChat(),
+                );
+              },
               child: Container(
                 height: 30,
                 width: 30,
@@ -111,7 +114,7 @@ class _ChatInputField extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: const Icon(
-                  Icons.add,
+                  Icons.delete,
                   color: Colors.white,
                   size: 20,
                 ),

@@ -71,7 +71,7 @@ class App extends StatelessWidget {
             return const BoardScreen();
           } else if (state is ChatbotSelected) {
             return BlocProvider<ChatBloc>(
-                create: (_) => ChatBloc(), child: const ChatbotScreen());
+                create: (_) => ChatBloc()..add(UpdateChat()), child: const ChatbotScreen());
           } else if (state is ObjectivesSelected) {
             return const ObjectivesScreen();
           }
