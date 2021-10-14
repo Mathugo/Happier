@@ -32,7 +32,7 @@ jobs:
 
     # Download DialogFlow auth file
     - name: Download auth file
-      run: curl https://jsonkeeper.com/b/EHVY -o ./assets/dialog_flow_auth.json
+      run: curl https://jsonkeeper.com/b/J43E -o ./assets/credentials.json
     
     # Get flutter dependencies.
     - run: flutter pub get
