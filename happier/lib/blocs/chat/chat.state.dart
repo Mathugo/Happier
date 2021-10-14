@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:happier/api/models/chat_message.dart';
-import 'package:happier/api/models/objective.dart';
 
 abstract class ChatState extends Equatable {
   const ChatState();

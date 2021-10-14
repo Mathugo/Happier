@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:happier/api/models/chat_message.dart';
 
 abstract class ChatEvent extends Equatable {
   const ChatEvent();
@@ -11,6 +10,11 @@ class ChatRequested extends ChatEvent {
 }
 
 class UpdateChat extends ChatEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class ClearChat extends ChatEvent {
   @override
   List<Object?> get props => [];
 }
