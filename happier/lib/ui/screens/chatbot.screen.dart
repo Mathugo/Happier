@@ -1,29 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:happier/api/models/chat_message.dart';
+import 'package:happier/blocs/chat/chat.dart';
 import 'package:happier/utils/constants/colors.dart';
 
 class ChatbotScreen extends StatelessWidget {
-  static const List<ChatMessage> testMessages = [
-    ChatMessage(messageContent: 'Hi, Pontus!', messageType: 'receiver'),
-    ChatMessage(
-        messageContent: 'How have you been today?', messageType: 'receiver'),
-    ChatMessage(
-        messageContent: 'Hey Happier, I am doing fine.', messageType: 'sender'),
-    ChatMessage(
-        messageContent:
-            'That is nice to hear, you know I am here if you need anything, right?',
-        messageType: 'receiver'),
-    ChatMessage(messageContent: 'Thank you!', messageType: 'sender'),
-  ];
-
   const ChatbotScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
+      children: [
         Expanded(
-          child: _MessagesView(messages: testMessages),
+          child: BlocBuilder<ChatBloc, ChatState>(builder: (context, state) {
+            if (state is ChatInitial) {
+              return _MessagesView(messages: state.messages);
+            } else if (state is ChatUpdated) {
+              return _MessagesView(messages: state.messages);
+            }
+
+            return Text('Something is wrong! currentChatState: $state');
+          }),
         ),
         _ChatInputField()
       ],
@@ -87,7 +84,9 @@ class _MessagesView extends StatelessWidget {
 }
 
 class _ChatInputField extends StatelessWidget {
-  const _ChatInputField({
+  final _textEditingController = TextEditingController();
+
+  _ChatInputField({
     Key? key,
   }) : super(key: key);
 
@@ -121,9 +120,10 @@ class _ChatInputField extends StatelessWidget {
             const SizedBox(
               width: 15,
             ),
-            const Expanded(
+            Expanded(
               child: TextField(
-                decoration: InputDecoration(
+                controller: _textEditingController,
+                decoration: const InputDecoration(
                     hintText: 'Write message...',
                     hintStyle: TextStyle(color: Colors.black54),
                     border: InputBorder.none),
@@ -133,7 +133,12 @@ class _ChatInputField extends StatelessWidget {
               width: 15,
             ),
             FloatingActionButton(
-              onPressed: () {},
+              onPressed: () {
+                BlocProvider.of<ChatBloc>(context).add(
+                  SendMessage(message: _textEditingController.text),
+                );
+                _textEditingController.clear();
+              },
               child: const Icon(
                 Icons.send,
                 color: Colors.white,

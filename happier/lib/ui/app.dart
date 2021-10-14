@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:happier/blocs/chat/chat.dart';
 import 'package:happier/blocs/current_view/current_view.dart';
 import 'package:happier/ui/screens/board.screen.dart';
 import 'package:happier/ui/screens/chatbot.screen.dart';
@@ -40,11 +41,11 @@ class App extends StatelessWidget {
             } else if (state is ObjectivesSelected) {
               titleText = 'Objectives';
             }
-            return Center(child: Text(
+            return Center(
+                child: Text(
               titleText,
               style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF504538)),
+                  fontWeight: FontWeight.bold, color: Color(0xFF504538)),
             ));
           }),
           leading: Padding(
@@ -69,7 +70,8 @@ class App extends StatelessWidget {
           if (state is BoardSelected) {
             return const BoardScreen();
           } else if (state is ChatbotSelected) {
-            return const ChatbotScreen();
+            return BlocProvider<ChatBloc>(
+                create: (_) => ChatBloc(), child: const ChatbotScreen());
           } else if (state is ObjectivesSelected) {
             return const ObjectivesScreen();
           }
@@ -80,7 +82,6 @@ class App extends StatelessWidget {
             BlocBuilder<CurrentViewBloc, ViewState>(builder: (context, state) {
           return BottomNavigationBar(
             items: const <BottomNavigationBarItem>[
-              
               BottomNavigationBarItem(
                 icon: Icon(FeatherIcons.home),
                 label: 'Board',
