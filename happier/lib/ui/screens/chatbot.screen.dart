@@ -48,7 +48,7 @@ class _MessagesView extends StatelessWidget {
           itemBuilder: (context, index) {
             return Container(
               padding: const EdgeInsets.only(
-                  left: 14, right: 14, top: 10, bottom: 10),
+                  left: 14, right: 14, top: 10, bottom: 4),
               child: Align(
                 alignment: (messages[index].messageType == 'receiver'
                     ? Alignment.topLeft
