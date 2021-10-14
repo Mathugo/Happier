@@ -40,10 +40,6 @@ final List<Widget> imageSliders = imgList
               children: <Widget>[
                 CachedNetworkImage(
                     imageUrl: item,
-                    progressIndicatorBuilder:
-                        (context, url, downloadProgress) =>
-                            CircularProgressIndicator(
-                                value: downloadProgress.progress),
                     errorWidget: (context, url, error) =>
                         const Icon(Icons.error),
                     fit: BoxFit.cover,

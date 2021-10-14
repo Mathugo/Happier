@@ -37,7 +37,7 @@ class App extends StatelessWidget {
             if (state is BoardSelected) {
               titleText = 'Board';
             } else if (state is ChatbotSelected) {
-              titleText = 'Chatbot';
+              titleText = 'Hap';
             } else if (state is ObjectivesSelected) {
               titleText = 'Objectives';
             }

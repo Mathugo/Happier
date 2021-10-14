@@ -3,25 +3,29 @@ import 'package:happier/api/models/objective.dart';
 
 class ObjectivesScreen extends StatelessWidget {
   static const List<Objective> testObjectives = [
-    Objective(title: 'Workout', description: 'Get your daily exercise!'),
-    Objective(
-        title: 'Study',
-        description: 'Make sure you have studied at least a little bit today.'),
-    Objective(
-        title: 'Speak with a friend',
-        description: 'It is important to maintain your personal relationships.')
+
+
+    Objective(title: 'Meditate', description: 'Ten minutes of meditation a day is good for your mind, you can use the « Meditation » tool'),
+
+    Objective(title: 'Get some air', description: 'If you can, a walk in the woods is a great idea. If you live in the city, you can go for a walk in a park. Try to do it for about thirty minutes'),
+
+    Objective(title: 'Hang out', description: 'Go outside with a friend, ask him or her to have coffee or do an activity together'),
+
+    Objective(title: 'Take a bath', description: 'It may not seem like much, but a bath is very relaxing for the body and mind. You can try to find the time to take one during the week')
   ];
 
   const ObjectivesScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return SingleChildScrollView(
+      child: Stack(children: <Widget>[
+        Column(
       children: [
         Container(
           margin: const EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 15),
           child: const Text(
-            'Here is a small list of goals for the week. Don\'t rush, do them when you feel like it and have time, the goal is not to do them all.',
+            'Here is a small list of objectives for your week. Don\'t rush, do them when you feel like it and have time, the goal is not to do them all, but to do them well',
             style: TextStyle(
                 fontSize: 18,
                 color: Color(0xFF444444)
@@ -33,7 +37,21 @@ class ObjectivesScreen extends StatelessWidget {
             margin: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
             child: const _ObjectivesList(objectives: testObjectives)
         ),
+        Container(
+          margin: const EdgeInsets.only(left: 30, right: 30, top: 0, bottom: 30),
+          child: const Text(
+            'After finishing this list, you can come back to Hap if you want to continue your discussion',
+            style: TextStyle(
+                fontSize: 18,
+                color: Color(0xFF444444)
+            ),
+            textAlign: TextAlign.justify,
+          ),
+        ),
       ],
+    )
+    ]
+    )
     );
   }
 }
@@ -51,6 +69,7 @@ class _ObjectivesList extends StatelessWidget {
     return ListView.builder(
         itemCount: objectives.length,
         shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
         padding: const EdgeInsets.only(top: 10, bottom: 10),
         itemBuilder: (context, index) {
           return _ObjectiveListItem(objective: objectives[index]);
