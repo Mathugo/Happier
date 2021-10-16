@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:happier/api/models/objective.dart';
 import 'package:happier/blocs/objectives/objectives.dart';
-import 'package:happier/blocs/objectives/objectives.state.dart';
 
 class ObjectivesScreen extends StatelessWidget {
   const ObjectivesScreen({Key? key}) : super(key: key);
@@ -11,31 +10,38 @@ class ObjectivesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
         child: Stack(children: <Widget>[
-      Column(
-        children: [
-          Container(
-            margin:
-                const EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 15),
-            child: const Text(
-              'Here is a small list of objectives for your week. Don\'t rush, do them when you feel like it and have time, the goal is not to do them all, but to do them well',
-              style: TextStyle(fontSize: 18, color: Color(0xFF444444)),
-              textAlign: TextAlign.justify,
-            ),
-          ),
-          Container(
-              margin: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
-              child: const _ObjectivesList()),
-          Container(
-            margin:
-                const EdgeInsets.only(left: 30, right: 30, top: 0, bottom: 30),
-            child: const Text(
-              'After finishing this list, you can come back to Hap if you want to continue your discussion',
-              style: TextStyle(fontSize: 18, color: Color(0xFF444444)),
-              textAlign: TextAlign.justify,
-            ),
-          ),
-        ],
-      )
+      BlocBuilder<ObjectivesBloc, ObjectivesState>(builder: (context, state) {
+        if (state is ObjectivesLoaded) {
+          return Column(
+            children: [
+              Container(
+                margin: const EdgeInsets.only(
+                    left: 30, right: 30, top: 30, bottom: 15),
+                child: const Text(
+                  'Here is a small list of objectives for your week. Don\'t rush, do them when you feel like it and have time, the goal is not to do them all, but to do them well',
+                  style: TextStyle(fontSize: 18, color: Color(0xFF444444)),
+                  textAlign: TextAlign.justify,
+                ),
+              ),
+              Container(
+                  margin:
+                      const EdgeInsets.only(left: 15, right: 15, bottom: 15),
+                  child: _ObjectivesList(objectives: state.objectives)),
+              Container(
+                margin: const EdgeInsets.only(
+                    left: 30, right: 30, top: 0, bottom: 30),
+                child: const Text(
+                  'After finishing this list, you can come back to Hap if you want to continue your discussion',
+                  style: TextStyle(fontSize: 18, color: Color(0xFF444444)),
+                  textAlign: TextAlign.justify,
+                ),
+              ),
+            ],
+          );
+        } else {
+          return Container();
+        }
+      })
     ]));
   }
 }
@@ -43,25 +49,21 @@ class ObjectivesScreen extends StatelessWidget {
 class _ObjectivesList extends StatelessWidget {
   const _ObjectivesList({
     Key? key,
+    required this.objectives,
   }) : super(key: key);
+
+  final List<Objective> objectives;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ObjectivesBloc, ObjectivesState>(
-        builder: (context, state) {
-      if (state is ObjectivesLoaded) {
-        return ListView.builder(
-            itemCount: state.objectives.length,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            padding: const EdgeInsets.only(top: 10, bottom: 10),
-            itemBuilder: (context, index) {
-              return _ObjectiveListItem(objective: state.objectives[index]);
-            });
-      } else {
-        return Container();
-      }
-    });
+    return ListView.builder(
+        itemCount: objectives.length,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        padding: const EdgeInsets.only(top: 10, bottom: 10),
+        itemBuilder: (context, index) {
+          return _ObjectiveListItem(objective: objectives[index]);
+        });
   }
 }
 
