@@ -11,6 +11,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         messageContent: 'How have you been today?', messageType: 'receiver'),
   ];
 
+  // TODO: Initial state should be ChatLoading
   ChatBloc()
       : super(ChatInitial(messages: [
           ChatMessage(messageContent: 'Hi, Pontus!', messageType: 'receiver'),
@@ -22,7 +23,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   @override
   Stream<ChatState> mapEventToState(ChatEvent event) async* {
     if (event is ChatRequested || event is UpdateChat) {
-      yield ChatLoading();
       yield ChatUpdated(messages: await _getMessages());
     } else if (event is SendMessage) {
       yield ChatLoading();
@@ -35,7 +35,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
                 messageContent: event.message, messageType: 'sender')));
       yield ChatUpdated(messages: messages);
     } else if (event is ClearChat) {
-      yield ChatLoading();
       Box box = await _getChatBox();
       box.put('messages', []);
       yield ChatUpdated(messages: _initialMessages);

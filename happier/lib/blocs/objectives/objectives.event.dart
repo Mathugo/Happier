@@ -11,12 +11,10 @@ class ObjectivesRequested extends ObjectivesEvent {
 }
 
 class ObjectiveUpdated extends ObjectivesEvent {
-  final Objective oldObjective;
   final Objective updatedObjective;
 
-  const ObjectiveUpdated(
-      {required this.oldObjective, required this.updatedObjective});
+  const ObjectiveUpdated({required this.updatedObjective});
 
   @override
-  List<Object?> get props => [oldObjective, updatedObjective];
+  List<Object?> get props => [updatedObjective];
 }

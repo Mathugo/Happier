@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:happier/blocs/chat/chat.dart';
 import 'package:happier/blocs/current_view/current_view.dart';
+import 'package:happier/blocs/objectives/objectives.dart';
 import 'package:happier/ui/screens/board.screen.dart';
 import 'package:happier/ui/screens/chatbot.screen.dart';
 import 'package:happier/ui/screens/objectives.screen.dart';
@@ -71,9 +72,12 @@ class App extends StatelessWidget {
             return const BoardScreen();
           } else if (state is ChatbotSelected) {
             return BlocProvider<ChatBloc>(
-                create: (_) => ChatBloc()..add(UpdateChat()), child: const ChatbotScreen());
+                create: (_) => ChatBloc()..add(UpdateChat()),
+                child: const ChatbotScreen());
           } else if (state is ObjectivesSelected) {
-            return const ObjectivesScreen();
+            return BlocProvider<ObjectivesBloc>(
+                create: (_) => ObjectivesBloc()..add(ObjectivesRequested()),
+                child: const ObjectivesScreen());
           }
 
           return const BoardScreen();
