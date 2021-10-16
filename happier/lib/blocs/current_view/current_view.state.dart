@@ -9,6 +9,7 @@ abstract class ViewState extends Equatable {
   get viewId => null;
 }
 
+// TODO: Tabs should be an enum
 class BoardSelected extends ViewState {
   @override
   get viewId => 0;

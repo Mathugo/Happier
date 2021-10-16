@@ -15,7 +15,7 @@ class ObjectivesLoading extends ObjectivesState {}
 class ObjectivesLoaded extends ObjectivesState {
   final List<Objective> objectives;
 
-  const ObjectivesLoaded(this.objectives);
+  const ObjectivesLoaded({required this.objectives});
 
   @override
   List<Object> get props => [objectives];
