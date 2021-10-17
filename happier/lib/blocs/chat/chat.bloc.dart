@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:happier/api/models/chat_message.dart';
+import 'package:happier/api/models/repositories/bot.repository.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'chat.dart';
@@ -10,9 +11,10 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     ChatMessage(
         messageContent: 'How have you been today?', messageType: 'receiver'),
   ];
+  final BotRepository _botRepository;
 
   // TODO: Initial state should be ChatLoading
-  ChatBloc()
+  ChatBloc(this._botRepository)
       : super(ChatInitial(messages: [
           ChatMessage(messageContent: 'Hi, Pontus!', messageType: 'receiver'),
           ChatMessage(
@@ -25,15 +27,16 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     if (event is ChatRequested || event is UpdateChat) {
       yield ChatUpdated(messages: await _getMessages());
     } else if (event is SendMessage) {
-      yield ChatLoading();
-      Box box = await _getChatBox();
-      List<ChatMessage> messages = List<ChatMessage>.from(box.get('messages'));
-      box.put(
-          'messages',
-          messages
-            ..add(ChatMessage(
-                messageContent: event.message, messageType: 'sender')));
+      List<ChatMessage> messages = await _getMessages();
+      messages.add(
+          ChatMessage(messageContent: event.message, messageType: 'sender'));
+      yield ChatResponseLoading(previousMessages: messages);
+      String? botResponse = await _botRepository.detectIntent(event.message);
+      messages.add(ChatMessage(
+          messageContent: botResponse ?? 'Sorry, I couldn\'t understand that.',
+          messageType: 'receiver'));
       yield ChatUpdated(messages: messages);
+      _saveMessages(messages);
     } else if (event is ClearChat) {
       Box box = await _getChatBox();
       box.put('messages', []);
@@ -44,6 +47,11 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   Future<List<ChatMessage>> _getMessages() async {
     Box box = await _getChatBox();
     return List<ChatMessage>.from(box.get('messages'));
+  }
+
+  Future<void> _saveMessages(List<ChatMessage> messages) async {
+    Box box = await _getChatBox();
+    box.put('messages', messages);
   }
 
   // TODO: box should act as a singleton

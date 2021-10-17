@@ -38,6 +38,7 @@ dependencies:
   hive: ^2.0.4
   hive_flutter: ^1.1.0
   uuid: ^3.0.5
+  scrollable_positioned_list: ^0.2.2
 
 dev_dependencies:
   flutter_native_splash: ^1.2.4
