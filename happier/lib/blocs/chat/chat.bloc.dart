@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:happier/api/models/chat_message.dart';
 import 'package:happier/api/models/repositories/bot.repository.dart';

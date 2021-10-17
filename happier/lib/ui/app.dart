@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:happier/blocs/chat/chat.dart';
 import 'package:happier/blocs/current_view/current_view.dart';
 import 'package:happier/blocs/objectives/objectives.dart';
 import 'package:happier/ui/screens/board.screen.dart';
