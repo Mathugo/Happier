@@ -33,7 +33,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
           ChatMessage(messageContent: event.message, messageType: 'sender'));
       yield ChatResponseLoading(previousMessages: messages);
       String? botResponse = await _botRepository.detectIntent(event.message);
-      print(botResponse);
       messages.add(ChatMessage(
           messageContent: botResponse ?? 'Sorry, I couldn\'t understand that.',
           messageType: 'receiver'));

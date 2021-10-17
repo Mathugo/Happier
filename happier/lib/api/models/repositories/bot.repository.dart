@@ -13,7 +13,7 @@ class BotRepository {
       );
       responseMessage = response.text;
     } catch (e) {
-      print('Could not handle input: $e');
+      print('Could not handle input: [$query], error: $e');
     }
 
     return responseMessage;

@@ -23,13 +23,12 @@ Future<void> main() async {
 }
 
 Future<DialogFlowtter> initDialogFlow() async {
-  print('[*] Getting credentials ..');
   DialogAuthCredentials credentials =
       await DialogAuthCredentials.fromFile('assets/credentials.json');
   DialogFlowtter instance = DialogFlowtter(
     credentials: credentials,
   );
-  print('[*] Done');
+  print('[*] Initialized dialogFlow');
   return instance;
 }
 
