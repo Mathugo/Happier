@@ -3,22 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:happier/api/models/chat_message.dart';
 import 'package:happier/api/models/objective.dart';
+import 'package:happier/api/models/repositories/bot.repository.dart';
 import 'package:happier/blocs/current_view/current_view.dart';
 import 'package:happier/ui/app.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'blocs/chat/chat.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   initHive();
+  final DialogFlowtter flowInstance = await initDialogFlow();
+  final BotRepository botRepository = BotRepository(flowInstance);
   runApp(MultiBlocProvider(providers: <BlocProvider>[
     BlocProvider<CurrentViewBloc>(
       create: (_) => CurrentViewBloc(),
     ),
+    BlocProvider<ChatBloc>(create: (_) => ChatBloc(botRepository)..add(UpdateChat())),
   ], child: const App()));
-  initDialogFlow();
 }
 
-Future<void> initDialogFlow() async {
+Future<DialogFlowtter> initDialogFlow() async {
   print('[*] Getting credentials ..');
   DialogAuthCredentials credentials =
       await DialogAuthCredentials.fromFile('assets/credentials.json');
@@ -26,6 +30,7 @@ Future<void> initDialogFlow() async {
     credentials: credentials,
   );
   print('[*] Done');
+  return instance;
 }
 
 Future<void> initHive() async {

@@ -17,6 +17,8 @@ class ChatbotScreen extends StatelessWidget {
               return _MessagesView(messages: state.messages);
             } else if (state is ChatUpdated) {
               return _MessagesView(messages: state.messages);
+            } else if (state is ChatResponseLoading) {
+              return _MessagesView(messages: state.previousMessages);
             }
 
             return const CircularProgressIndicator();
