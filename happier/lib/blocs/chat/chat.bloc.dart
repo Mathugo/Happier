@@ -1,37 +1,40 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:happier/api/models/chat_message.dart';
 import 'package:happier/api/models/repositories/bot.repository.dart';
+import 'package:happier/api/models/repositories/gpt3.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'chat.dart';
 
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
-  final List<ChatMessage> _initialMessages = [
-    ChatMessage(messageContent: 'Hi, Pontus!', messageType: 'receiver'),
-    ChatMessage(
-        messageContent: 'How have you been today?', messageType: 'receiver'),
-  ];
   final BotRepository _botRepository;
+  final OpenAI openAI;
 
   // TODO: Initial state should be ChatLoading
-  ChatBloc(this._botRepository)
-      : super(ChatInitial(messages: [
-          ChatMessage(messageContent: 'Hi, Pontus!', messageType: 'receiver'),
-          ChatMessage(
-              messageContent: 'How have you been today?',
-              messageType: 'receiver'),
+  ChatBloc(this._botRepository, this.openAI)
+      : super(ChatInitial(messages: <ChatMessage>[
+          ChatMessage(messageContent: 'Loading...', messageType: 'receiver')
         ]));
 
   @override
   Stream<ChatState> mapEventToState(ChatEvent event) async* {
     if (event is ChatRequested || event is UpdateChat) {
-      yield ChatUpdated(messages: await _getMessages());
+      List<ChatMessage> messages = [];
+      String? botResponse = await _botRepository.detectIntent('Hello!');
+      messages.add(ChatMessage(
+          messageContent: botResponse ?? 'Hi! I\'m Hap, how can I help you?',
+          messageType: 'receiver'));
+      _saveMessages(messages);
+      yield ChatUpdated(messages: messages);
     } else if (event is SendMessage) {
       List<ChatMessage> messages = await _getMessages();
       messages.add(
           ChatMessage(messageContent: event.message, messageType: 'sender'));
       yield ChatResponseLoading(previousMessages: messages);
       String? botResponse = await _botRepository.detectIntent(event.message);
+      if (botResponse == 'none') {
+        botResponse = 'Sorry, I don\'t understand you.';
+      }
       messages.add(ChatMessage(
           messageContent: botResponse ?? 'Sorry, I couldn\'t understand that.',
           messageType: 'receiver'));
@@ -40,7 +43,11 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     } else if (event is ClearChat) {
       Box box = await _getChatBox();
       box.put('messages', []);
-      yield ChatUpdated(messages: _initialMessages);
+      yield ChatUpdated(messages: <ChatMessage>[
+        ChatMessage(
+            messageContent: 'Hi! I\'m Hap, how can I help you?',
+            messageType: 'receiver')
+      ]);
     }
   }
 
@@ -58,7 +65,11 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   Future<Box> _getChatBox() async {
     var box = await Hive.openBox('chatBox');
     if (box.get('messages') == null || box.get('messages').length == 0) {
-      box.put('messages', _initialMessages);
+      box.put('messages', <ChatMessage>[
+        ChatMessage(
+            messageContent: 'Hi! I\'m Hap, how can I help you?',
+            messageType: 'receiver')
+      ]);
     }
     return box;
   }

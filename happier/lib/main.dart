@@ -8,17 +8,22 @@ import 'package:happier/blocs/current_view/current_view.dart';
 import 'package:happier/ui/app.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'blocs/chat/chat.dart';
+import 'package:happier/api/models/repositories/gpt3.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   initHive();
   final DialogFlowtter flowInstance = await initDialogFlow();
-  final BotRepository botRepository = BotRepository(flowInstance);
+  final OpenAI openAI =
+      new OpenAI(apiKey: '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');
+  final BotRepository botRepository = BotRepository(flowInstance, openAI);
+
   runApp(MultiBlocProvider(providers: <BlocProvider>[
     BlocProvider<CurrentViewBloc>(
       create: (_) => CurrentViewBloc(),
     ),
-    BlocProvider<ChatBloc>(create: (_) => ChatBloc(botRepository)..add(UpdateChat())),
+    BlocProvider<ChatBloc>(
+        create: (_) => ChatBloc(botRepository, openAI)..add(UpdateChat())),
   ], child: const App()));
 }
 
