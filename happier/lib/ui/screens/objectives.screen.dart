@@ -18,7 +18,7 @@ class ObjectivesScreen extends StatelessWidget {
                 margin: const EdgeInsets.only(
                     left: 30, right: 30, top: 30, bottom: 15),
                 child: const Text(
-                  'Here is a small list of objectives for your week. Don\'t rush, do them when you feel like it and have time, the goal is not to do them all, but to do them well',
+                  'Here is a small list of objectives for your week. Don\'t rush, do them when you feel like it and have time, the goal is not to do them all, but to do them well.',
                   style: TextStyle(fontSize: 18, color: Color(0xFF444444)),
                   textAlign: TextAlign.justify,
                 ),
@@ -31,7 +31,7 @@ class ObjectivesScreen extends StatelessWidget {
                 margin: const EdgeInsets.only(
                     left: 30, right: 30, top: 0, bottom: 30),
                 child: const Text(
-                  'After finishing this list, you can come back to Hap if you want to continue your discussion',
+                  'After finishing this list, you can come back to Hap if you want to continue your discussion.',
                   style: TextStyle(fontSize: 18, color: Color(0xFF444444)),
                   textAlign: TextAlign.justify,
                 ),
