@@ -5,6 +5,7 @@ import 'package:happier/blocs/current_view/current_view.dart';
 import 'package:happier/blocs/objectives/objectives.dart';
 import 'package:happier/ui/screens/board.screen.dart';
 import 'package:happier/ui/screens/chatbot.screen.dart';
+import 'package:happier/ui/screens/help.screen.dart';
 import 'package:happier/ui/screens/objectives.screen.dart';
 import 'package:happier/utils/constants/colors.dart';
 import 'package:happier/utils/helpers/create_material_color.dart';
@@ -40,6 +41,8 @@ class App extends StatelessWidget {
               titleText = 'Hap';
             } else if (state is ObjectivesSelected) {
               titleText = 'Objectives';
+            } else if (state is HelpSelected) {
+              titleText = 'Help';
             }
             return Center(
                 child: Text(
@@ -54,15 +57,28 @@ class App extends StatelessWidget {
           ),
           actions: <Widget>[
             // Icon button profile
-            IconButton(
-              icon: const Icon(
-                FeatherIcons.phone,
-                color: PRIMARY_COLOR,
-              ),
-              onPressed: () {
-                // do something
-              },
-            )
+            BlocBuilder<CurrentViewBloc, ViewState>(builder: (context, state) {
+              if (state is ChatbotSelected) {
+                return IconButton(
+                  icon: const Icon(
+                    Icons.help,
+                    color: PRIMARY_COLOR,
+                  ),
+                  onPressed: () => BlocProvider.of<CurrentViewBloc>(context)
+                      .add(ViewRequested(view: HelpSelected())),
+                );
+              }
+              // Default AppBar icon
+              return IconButton(
+                icon: const Icon(
+                  FeatherIcons.phone,
+                  color: PRIMARY_COLOR,
+                ),
+                onPressed: () {
+                  // do something
+                },
+              );
+            })
           ],
         ),
         body:
@@ -75,6 +91,8 @@ class App extends StatelessWidget {
             return BlocProvider<ObjectivesBloc>(
                 create: (_) => ObjectivesBloc()..add(ObjectivesRequested()),
                 child: const ObjectivesScreen());
+          } else if (state is HelpSelected) {
+            return const HelpScreen();
           }
 
           return const BoardScreen();
@@ -96,8 +114,10 @@ class App extends StatelessWidget {
                 label: 'Objectives',
               ),
             ],
-            currentIndex: state.viewId,
-            selectedItemColor: PRIMARY_COLOR,
+            // Checking state.viewId in order to not highlight any item when screen not in navMenu is active
+            currentIndex: state.viewId > 2 ? 2 : state.viewId,
+            selectedItemColor:
+                state.viewId > 2 ? SECONDARY_COLOR : PRIMARY_COLOR,
             unselectedItemColor: SECONDARY_COLOR,
             showSelectedLabels: false,
             showUnselectedLabels: false,

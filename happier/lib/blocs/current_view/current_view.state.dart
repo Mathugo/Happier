@@ -24,3 +24,8 @@ class ObjectivesSelected extends ViewState {
   @override
   get viewId => 2;
 }
+
+class HelpSelected extends ViewState {
+  @override
+  get viewId => 4;
+}
