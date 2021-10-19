@@ -24,3 +24,8 @@ class ObjectivesSelected extends ViewState {
   @override
   get viewId => 2;
 }
+
+class NathanSelected extends ViewState {
+  @override
+  get viewId => 3;
+}

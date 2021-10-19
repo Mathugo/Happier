@@ -5,6 +5,7 @@ import 'package:happier/blocs/current_view/current_view.dart';
 import 'package:happier/blocs/objectives/objectives.dart';
 import 'package:happier/ui/screens/board.screen.dart';
 import 'package:happier/ui/screens/chatbot.screen.dart';
+import 'package:happier/ui/screens/nathan.screen.dart';
 import 'package:happier/ui/screens/objectives.screen.dart';
 import 'package:happier/utils/constants/colors.dart';
 import 'package:happier/utils/helpers/create_material_color.dart';
@@ -40,6 +41,8 @@ class App extends StatelessWidget {
               titleText = 'Hap';
             } else if (state is ObjectivesSelected) {
               titleText = 'Objectives';
+            } else if (state is NathanSelected) {
+              titleText = 'Nathan';
             }
             return Center(
                 child: Text(
@@ -75,6 +78,8 @@ class App extends StatelessWidget {
             return BlocProvider<ObjectivesBloc>(
                 create: (_) => ObjectivesBloc()..add(ObjectivesRequested()),
                 child: const ObjectivesScreen());
+          } else if (state is NathanSelected) {
+            return const NathanScreen();
           }
 
           return const BoardScreen();
@@ -96,7 +101,7 @@ class App extends StatelessWidget {
                 label: 'Objectives',
               ),
             ],
-            currentIndex: state.viewId,
+            currentIndex: state.viewId > 2 ? 2 : state.viewId, // Highlight Objectives if screen is not in navMenu
             selectedItemColor: PRIMARY_COLOR,
             unselectedItemColor: SECONDARY_COLOR,
             showSelectedLabels: false,

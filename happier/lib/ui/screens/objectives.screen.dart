@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:happier/api/models/objective.dart';
+import 'package:happier/blocs/current_view/current_view.dart';
 import 'package:happier/blocs/objectives/objectives.dart';
 
 class ObjectivesScreen extends StatelessWidget {
@@ -36,6 +37,10 @@ class ObjectivesScreen extends StatelessWidget {
                   textAlign: TextAlign.justify,
                 ),
               ),
+              ElevatedButton(
+                  onPressed: () => BlocProvider.of<CurrentViewBloc>(context)
+                      .add(ViewRequested(view: NathanSelected())),
+                  child: const Text('NATHAN'))
             ],
           );
         } else {
