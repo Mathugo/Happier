@@ -29,3 +29,8 @@ class HelpSelected extends ViewState {
   @override
   get viewId => 4;
 }
+
+class FAQSelected extends ViewState {
+  @override
+  get viewId => 5;
+}

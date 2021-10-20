@@ -6,6 +6,7 @@ import 'package:happier/blocs/objectives/objectives.dart';
 import 'package:happier/ui/screens/board.screen.dart';
 import 'package:happier/ui/screens/chatbot.screen.dart';
 import 'package:happier/ui/screens/help.screen.dart';
+import 'package:happier/ui/screens/faq.screen.dart';
 import 'package:happier/ui/screens/objectives.screen.dart';
 import 'package:happier/utils/constants/colors.dart';
 import 'package:happier/utils/helpers/create_material_color.dart';
@@ -42,7 +43,9 @@ class App extends StatelessWidget {
             } else if (state is ObjectivesSelected) {
               titleText = 'Objectives';
             } else if (state is HelpSelected) {
-              titleText = 'Help';
+              titleText = 'Account';
+            } else if (state is FAQSelected) {
+            titleText = 'FAQ';
             }
             return Center(
                 child: Text(
@@ -58,6 +61,16 @@ class App extends StatelessWidget {
           actions: <Widget>[
             // Icon button profile
             BlocBuilder<CurrentViewBloc, ViewState>(builder: (context, state) {
+              if (state is HelpSelected) {
+                return IconButton(
+                  icon: const Icon(
+                    Icons.help,
+                    color: PRIMARY_COLOR,
+                  ),
+                  onPressed: () => BlocProvider.of<CurrentViewBloc>(context)
+                      .add(ViewRequested(view: FAQSelected())),
+                );
+              }
               if (state is ChatbotSelected) {
                 return IconButton(
                   icon: const Icon(
@@ -93,6 +106,8 @@ class App extends StatelessWidget {
                 child: const ObjectivesScreen());
           } else if (state is HelpSelected) {
             return const HelpScreen();
+          } else if (state is FAQSelected) {
+            return const FAQScreen();
           }
 
           return const BoardScreen();
