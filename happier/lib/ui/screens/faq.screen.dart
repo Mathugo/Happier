@@ -19,7 +19,7 @@ class FAQScreen extends StatelessWidget {
             )
           ),
           ),
-          child: const Text('Comment Hap est-il capable de m\'aider ?',
+          child: const Text('Can I trust the findings of Hap?',
             style: TextStyle(fontSize: 18)
           )
         ),
