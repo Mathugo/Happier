@@ -75,7 +75,7 @@ class App extends StatelessWidget {
               if (state is ChatbotSelected) {
                 return IconButton(
                   icon: const Icon(
-                    Icons.help,
+                    Icons.account_circle,
                     color: PRIMARY_COLOR,
                   ),
                   onPressed: () => BlocProvider.of<CurrentViewBloc>(context)
