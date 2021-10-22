@@ -11,6 +11,7 @@ import 'package:happier/ui/screens/objectives.screen.dart';
 import 'package:happier/utils/constants/colors.dart';
 import 'package:happier/utils/helpers/create_material_color.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class App extends StatelessWidget {
   static const TITLE = 'Happier';
@@ -45,7 +46,7 @@ class App extends StatelessWidget {
             } else if (state is HelpSelected) {
               titleText = 'Account';
             } else if (state is FAQSelected) {
-            titleText = 'FAQ';
+              titleText = 'FAQ';
             }
             return Center(
                 child: Text(
@@ -88,7 +89,10 @@ class App extends StatelessWidget {
                   color: PRIMARY_COLOR,
                 ),
                 onPressed: () {
-                  // do something
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) =>
+                          _buildPhonePopupDialog(context));
                 },
               );
             })
@@ -159,4 +163,49 @@ class App extends StatelessWidget {
         break;
     }
   }
+}
+
+Widget _buildPhonePopupDialog(BuildContext context) {
+  return AlertDialog(
+    title: const Text('Numbers'),
+    content: Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Padding(
+          padding: EdgeInsets.only(bottom: 10),
+          child: Text('Click a link below in order to call the help line:'),
+        ),
+        GestureDetector(
+          child: Text(
+            'Urgent emergency (112)',
+            style: TextStyle(color: Colors.blue[800], decoration: TextDecoration.underline, fontSize: 22),
+          ),
+          onTap: () => launch('tel://112'),
+        ),
+        GestureDetector(
+          child: Text(
+            'Suicide line (90101)',
+            style: TextStyle(color: Colors.blue[800], decoration: TextDecoration.underline, fontSize: 22),
+          ),
+          onTap: () => launch('tel://90101'),
+        ),
+        GestureDetector(
+          child: Text(
+            'Healthcare advice (1177)',
+            style: TextStyle(color: Colors.blue[800], decoration: TextDecoration.underline, fontSize: 22),
+          ),
+          onTap: () => launch('tel://1177'),
+        ),
+      ],
+    ),
+    actions: <Widget>[
+      TextButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        child: const Text('Close'),
+      ),
+    ],
+  );
 }
