@@ -14,16 +14,14 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   initHive();
   final DialogFlowtter flowInstance = await initDialogFlow();
-  final OpenAI openAI =
-      new OpenAI(apiKey: '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');
-  final BotRepository botRepository = BotRepository(flowInstance, openAI);
+  final BotRepository botRepository = BotRepository(flowInstance);
 
   runApp(MultiBlocProvider(providers: <BlocProvider>[
     BlocProvider<CurrentViewBloc>(
       create: (_) => CurrentViewBloc(),
     ),
     BlocProvider<ChatBloc>(
-        create: (_) => ChatBloc(botRepository, openAI)..add(UpdateChat())),
+        create: (_) => ChatBloc(botRepository)..add(UpdateChat())),
   ], child: const App()));
 }
 

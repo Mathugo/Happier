@@ -1,17 +1,17 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:happier/api/models/chat_message.dart';
 import 'package:happier/api/models/repositories/bot.repository.dart';
 import 'package:happier/api/models/repositories/gpt3.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
+import 'dart:io';
 import 'chat.dart';
 
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
   final BotRepository _botRepository;
-  final OpenAI openAI;
 
   // TODO: Initial state should be ChatLoading
-  ChatBloc(this._botRepository, this.openAI)
+  ChatBloc(this._botRepository)
       : super(ChatInitial(messages: <ChatMessage>[
           ChatMessage(messageContent: 'Loading...', messageType: 'receiver')
         ]));
@@ -35,9 +35,20 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       if (botResponse == 'none') {
         botResponse = 'Sorry, I don\'t understand you.';
       }
-      messages.add(ChatMessage(
-          messageContent: botResponse ?? 'Sorry, I couldn\'t understand that.',
-          messageType: 'receiver'));
+      // TEST IF WE HAVE MULTIPLE RESPONSES
+      List<String>? splited_response = botResponse?.split(';');
+      if (splited_response?.length == 1) {
+        messages.add(ChatMessage(
+            messageContent:
+                botResponse ?? 'Sorry, I couldn\'t understand that.',
+            messageType: 'receiver'));
+      } else {
+        splited_response?.forEach((msg) {
+          messages
+              .add(ChatMessage(messageContent: msg, messageType: 'receiver'));
+        });
+      }
+
       yield ChatUpdated(messages: messages);
       _saveMessages(messages);
     } else if (event is ClearChat) {
